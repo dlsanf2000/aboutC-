@@ -1,14 +1,11 @@
 #include <iostream>
 using namespace std;
 
-
-//예제 4-1
+//에제 3-1
 /*
 class Circle {
-	int radius;
 public:
-	Circle() { radius = 1; }
-	Circle(int r) { radius = r; }
+	int radius;
 	double getArea();
 };
 
@@ -18,321 +15,302 @@ double Circle::getArea() {
 
 int main() {
 	Circle donut;
+	donut.radius = 1;
+	double area = donut.getArea();
+	cout << "donut 면적은 " << area << endl;
+
+	Circle pizza;
+	pizza.radius = 30;
+	area = pizza.getArea();
+	cout << "pizza 면적은 " << area << endl;
+
+	system("pause");
+
+}
+*/
+
+//예제 3-2
+/*
+class Rectangle {
+public:
+	int width;
+	int height;
+	int getArea();
+};
+
+int Rectangle::getArea() {
+	return width * height;
+}
+
+int main() {
+	Rectangle rect;
+	rect.width = 3;
+	rect.height = 5;
+	cout << "사각형의 면적은" << rect.getArea() << endl;
+
+	system("pause");
+}
+*/
+
+//2-16
+
+/*
+#include <cstring>
+
+int main() {
+	char text[10000];		//10000개의 문자열 배열
+	int histo[26];			//영문자 26글자의 누적수 저장, 초기값은 모두 0
+
+	cout << "영문 텍스트를 입력하세요. 히스토그램을 그립니다." << endl;
+	cout << "텍스트의 끝은 ;입니다. 10000개까지 가능합니다." << endl;
+
+	cin.getline(text, 10000, ';');
+
+	int len = strlen(text);
+	for (int i = 0; i < len; i++) {
+		if (isalpha(text[i])) {
+			char c = tolower(text[i]);
+			histo[c - 'a']++;
+		}
+	}
+	int n = 0;
+	for (int i = 0; i < 26; i++) {		//전체 알파벳 수 더하기
+		cout << char('a' + i) << "(" << histo[i] << ")" << "\t" << ";";
+		for (int j = 0; j < histo[i]; j++)
+			cout << '*';
+		cout << endl;
+	}
+}
+*/
+
+
+//예제 3-3
+
+/*
+class Circle {
+public:
+	int radius;
+	Circle();
+	Circle(int r);
+	double getArea();
+};
+Circle::Circle() {
+	radius = 1;
+	cout << "반지름" << radius << "원 생성" << endl;
+
+}
+
+Circle::Circle(int r) {
+	radius = r;
+	cout << "반지름" << radius << "원 생성" << endl;
+}
+
+double Circle::getArea() {
+	return 3.14*radius*radius;
+}
+
+int main() {
+	Circle donut;
+	double area = donut.getArea();
+	cout << "donut 면적은" << area << endl;
+
+	Circle pizza(30);
+	area = pizza.getArea();
+	cout << "pizza 면적은" << area << endl;
+
+	system("pause");
+}
+*/
+
+//예제 3-4
+
+/*
+class Circle {
+public:
+	int radius;
+	Circle();
+	Circle(int r);
+	double getArea();
+};
+
+Circle::Circle() : Circle(1) { }
+
+Circle::Circle(int r) {
+	radius = r;
+	cout << " 반지름 " << radius << " 원 생성" << endl;
+}
+
+double Circle::getArea() {
+	return 3.14*radius*radius;
+}
+
+int main() {
+	Circle donut;
+	double area = donut.getArea();
+	cout << "donut 면적은" << area << endl;
+
+	Circle pizza(30);
+	area = pizza.getArea();
+	cout << "pizza 면적은 " << area << endl;
+
+	system("pause");
+}
+*/
+
+
+//예제 3-5
+
+/*
+class Point {
+	int x, y;
+public:
+	Point();
+	Point(int a, int b);
+	void show() { cout << "(" << x <<"," << y << ")" << endl; }
+};
+
+Point::Point() :Point(0, 0) { }
+
+Point::Point(int a, int b)
+	: x(a), y(b) { }
+int main() {
+	Point origin;
+	Point target(10, 20);
+	origin.show();
+	target.show();
+
+	system("pause");
+}
+*/
+
+//예제 3-6
+
+/*
+class Rectangle {
+public:
+	int width, height;
+	Rectangle();
+	Rectangle(int w, int h);
+	Rectangle(int length);
+	bool isSquare();
+};
+
+Rectangle::Rectangle() {
+	width = height = 1;
+}
+
+Rectangle::Rectangle(int w, int h) {
+	width = w;
+	height = h;
+}
+
+Rectangle::Rectangle(int length) {
+	width = height = length;
+}
+
+bool Rectangle::isSquare(){
+	if (width == height) return true;
+	else return false;
+}
+
+int main() {
+	Rectangle rect1;
+	Rectangle rect2(3, 5);
+	Rectangle rect3(3);
+
+	if (rect1.isSquare()) cout << "rect1은 정사각형이다." << endl;
+	if (rect2.isSquare()) cout << "rect2는 정사각형이다." << endl;
+	if (rect3.isSquare())cout << "rect3은 정사각형이다." << endl;
+
+	system("pause");
+
+}
+*/
+
+//예제 3-7
+/*
+class Circle {
+public:
+	int radius;
+	Circle();
+	Circle(int r);
+	~Circle();
+	double getArea();
+};
+
+Circle::Circle() {
+	radius = 1;
+	cout << "반지름" << radius << "원 생성" << endl;
+}
+
+Circle::Circle(int r) {
+	radius = r;
+	cout << "반지름" << radius << "  원 생성" << endl;
+}
+
+Circle::~Circle() {
+	cout << "반지름" << radius << " 원 소멸" << endl;
+}
+
+double Circle::getArea() {
+	return 3.14*radius*radius;
+}
+
+int main() {
+	Circle donut;
 	Circle pizza(30);
 
-	//객체 이름으로 멤버 접근
-	cout << donut.getArea() << endl;
+	return 0;
 
-	//객체 포인터로 멤버 접근
-	Circle *p;
-	p = &donut;
-	cout << p->getArea() << endl;
-	cout << (*p).getArea() << endl;
-
-	p = &pizza;
-	cout << p->getArea() << endl;
-	cout << (*p).getArea() << endl;
 }
+
 */
 
-//예제 4-2
+//예제 3-8
+
 /*
+#include <iostream>
+using namespace std;
+
 class Circle {
-	int radius;
 public:
-	Circle() { radius = 1; }
-	Circle(int r) { radius = r; }
-	void setRadius(int r) { radius = r; }
-	double getArea();
-
-};
-
-double Circle::getArea() {
-	return 3.14*radius*radius;
-}
-
-int main() {
-	Circle circleArray[3];
-
-//배열의 각 원소 객체의 멤버 접근
-circleArray[0].setRadius(10);
-circleArray[1].setRadius(20);
-circleArray[2].setRadius(30);
-
-for (int i = 0; i < 3; i++)
-	cout << "Circle" << i << "의 면적은" << circleArray[i].getArea() << endl;
-
-Circle *p;
-p = circleArray;
-for (int i = 0; i < 3; i++) {
-	cout << "CIrcle" << i << "의 면적은" << p->getArea() << endl;
-	p++;
-}
-}
-*/
-
-
-//예제 4-3
-/*
-class Circle {
 	int radius;
-public:
-	Circle() { radius = 1; }
-	Circle(int r) { radius = r; }
-	void setRadius(int r) { radius = r; }
-	double getArea();
-};
-
-double Circle::getArea() {
-	return 3.14*radius*radius;
-}
-
-int main() {
-	Circle circleArray[3] = { Circle(10), Circle(20), Circle() };
-
-	for (int i = 0; i < 3; i++)
-		cout << "Circle" << i << "의 면적은" << circleArray[i].getArea() << endl;
-}
-*/
-
-//예제 4-4
-
-/*
-class Circle {
-	int radius;
-public:
-	Circle() { radius = 1; }
-	Circle(int r) { radius = r; }
-	void setRadius(int r) { radius = r; }
-	double getArea();
-};
-
-double Circle::getArea() {
-	return 3.14*radius*radius;
-}
-
-int main() {
-	Circle circles[2][3];
-
-	circles[0][0].setRadius(1);
-	circles[0][1].setRadius(2);
-	circles[0][2].setRadius(3);
-	circles[1][0].setRadius(4);
-	circles[1][1].setRadius(5);
-	circles[1][2].setRadius(6);
-
-	for (int i = 0; i < 2; i++)
-		for (int j = 0; j < 3; j++) {
-			cout << "Circle [" << i << "," << j << "}의 면적은";
-			cout << circles[i][j].getArea() << endl;
-		}
-}
-*/
-
-
-//예제 4-5
-/*
-int main() {
-	int *p;
-
-	p = new int;
-	if (!p) {
-		cout << "메모리를 할당할 수 없습니다.";
-		return 0;
-	}
-	*p = 5;
-	int n = *p;
-	cout << "*p =" << *p << endl;
-	cout << "n = "<< n << endl;
-
-	delete p;
-}
-*/
-
-//예제 4-6
-
-/*
-int main() {
-	cout << "입력할 정수의 개수는?";
-	int n;
-	cin >> n;
-	if (n <= 0) return 0;
-	int *p = new int[n];
-	if (!p) {
-		cout << "메모리를 할당할 수 없습니다.";
-		return 0;
-	}
-	for (int i = 0; i < n; i++) {
-		cout << i + 1<< "번째 정수: ";
-		cin >> p[i];
-	}
-	int sum = 0;
-	for (int i = 0; i < n; i++)
-		sum += p[i];
-	cout << "평균 = " << sum / n << endl;
-
-	delete[] p;
-}
-*/
-
-//예제 4-7
-/*
-class Circle {
-	int radius;
-public:
 	Circle();
-	Circle(int r);
+	Circle(int n);
 	~Circle();
-	void setRadius(int r) { radius = r; }
-	double getArea() { return 3.14*radius*radius; }
-};
-
-Circle::Circle(){
-radius = 1;
-cout << "생성자 실행 radius = " << radius << endl;
-
-}
-
-Circle::Circle(int r) {
-	radius = r;
-	cout << "생성자 실행 radius = " << radius << endl;
-}
-
-Circle::~Circle() {
-	cout << "소멸자 실행 radius = " << radius << endl;
-}
-
-int main() {
-	Circle *p, *q;
-	p = new Circle;
-	q = new Circle(30);
-	cout << p->getArea() << endl << q->getArea() << endl;
-	delete p;
-	delete q;
-}
-*/
-
-
-//예제 4-8
-/*
-class Circle {
-	int radius;
-public:
-	Circle();
-	Circle(int r);
-	~Circle();
-	void setRadius(int r) { radius = r; }
-	double getArea() {
-		return 3.14*radius*radius;
-	}
+	double getArea();
 
 };
 
 Circle::Circle() {
 	radius = 1;
-	cout << "생성자 실행 radius = " << radius << endl;
-}
-Circle::Circle(int r) {
-	radius = r;
-	cout << "생성자 실행 radius = " << radius << endl;
-}
-
-Circle::~Circle() {
-	cout << "소멸자 실행 radius =" << radius << endl;
-}
-
-int main() {
-	int radius;
-	while (true) {
-		cout << "정수 반지름 입력(음수이면 종료)>>";
-		cin >> radius;
-		if (radius < 0) break;
-		Circle *p = new Circle(radius);
-		cout << "원의 면적은" << p->getArea() << endl;
-		delete p;
-	}
-}
-*/
-
-
-//예제 4-9
-/*
-class Circle {
-	int radius;
-public:
-	Circle();
-	Circle(int r);
-	~Circle();
-	void setRadius(int r) { radius = r; }
-	double getArea() { return 3.14*radius*radius; }
-};
-
-Circle::Circle() {
-	radius = 1;
-	cout << "생성자 실행 radius = " << radius << endl;
+	cout << "반지름" << radius << "원 생성" << endl;
 }
 
 Circle::Circle(int r) {
 	radius = r;
-	cout << "생성자 실행 radius="<< radius << endl;
+	cout << "반지름" << radius << "원 생성" << endl;
 }
 
 Circle::~Circle() {
-	cout << "소멸자 실행 radius = " << radius << endl;
+	cout << "반지름" << radius << "원 소멸" << endl;
+}
+
+double Circle::getArea() {
+	return 3.14*radius*radius;
+}
+
+Circle globalDonut(1000);
+Circle globalPizza(2000);
+
+void f() {
+	Circle fDonut(100);
+	Circle fPizza(200);
 }
 
 int main() {
-	Circle *pArray = new Circle[3];
-	pArray[0].setRadius(10);
-	pArray[1].setRadius(20);
-	pArray[2].setRadius(30);
-
-	for (int i = 0; i < 3; i++) {
-		cout << pArray[i].getArea() << endl;
-	}
-	Circle *p = pArray;
-	for (int i = 0; i < 3; i++) {
-		cout << p->getArea() << endl;
-		p++;
-	}
-	delete[] pArray;
+	Circle mainDonut;
+	Circle mainPizza(30);
+	f();
 }
 */
-
-//예제 4-10
-
-class Circle {
-	int radius;
-public:
-	Circle();
-	~Circle() { }
-	void setRadius(int r) { radius = r; }
-	double getArea() { return 3.14*radius*radius; }
-
-};
-Circle::Circle() {
-	radius = 1;
-}
-int main() {
-	cout << "생성하고자 하는 원의 개수?";
-	int n, radius;
-	cin >> n;
-	if (n <= 0) return 0;
-	Circle *pArray = new Circle[n];
-	for (int i = 0; i < n; i++) {
-		cout << "원" << i + 1 << ":";
-		cin >> radius;
-		pArray[i].setRadius(radius);
-	}
-	int count = 0;
-	Circle* p = pArray;
-	for (int i = 0; i < n; i++) {
-		cout << p->getArea() << " ";
-		if (p->getArea() >= 100 && p->getArea() <= 200)
-			count++;
-		p++;
-	}
-	cout << endl << "면적이 100에서 200 사이인 원의 개수는" << count << endl;
-	delete[] pArray;
-	
-}
